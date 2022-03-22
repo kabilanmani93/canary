@@ -4,7 +4,10 @@ metadata:
   name: colorapi
 spec:
   ports:
-  - port: 5000
+  - name: http
+    port: 5000
+    targetPort: 5000
+    protocol: TCP
   selector:
     app: colorapi
-  type: NodePort
+  type: ClusterIP
