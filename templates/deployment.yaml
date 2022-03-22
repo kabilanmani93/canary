@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: colorapi
+  labels:
+    app: colorapi
+spec:
+  replicas: 5
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: colorapi
+  template:
+    metadata:
+      labels:
+        app: colorapi
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause:
+          duration: "2m"
+      - setWeight: 50
+      - pause:
+          duration: "2m"      
+    spec:
+      containers:
+      - name: colorapi
+        image: particule/simplecolorapi:2.0
+        imagePullPolicy: Always
+        ports:
+        - name: web
+          containerPort: 5000
