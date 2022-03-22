@@ -14,19 +14,10 @@ spec:
     metadata:
       labels:
         app: colorapi
-  strategy:
-    canary:
-      steps:
-      - setWeight: 20
-      - pause:
-          duration: "2m"
-      - setWeight: 50
-      - pause:
-          duration: "2m"      
     spec:
       containers:
       - name: colorapi
-        image: particule/simplecolorapi:2.0
+        image: particule/simplecolorapi:1.0
         imagePullPolicy: Always
         ports:
         - name: web
