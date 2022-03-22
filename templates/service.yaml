@@ -4,10 +4,7 @@ metadata:
   name: colorapi
 spec:
   ports:
-  - name: http
-    port: 5000
-    targetPort: 5000
-    protocol: TCP
+  - port: 80
   selector:
     app: colorapi
-  type: ClusterIP
+  type: LoadBalancer
