@@ -10,10 +10,10 @@ spec:
       steps:
       - setWeight: 20
       - pause:
-          duration: "30s"
+          duration: "1m"
       - setWeight: 50
       - pause:
-          duration: "30s" 
+          duration: "1m" 
   replicas: 5
   revisionHistoryLimit: 2
   selector:
@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: colorapi
-        image: particule/simplecolorapi:1.0
+        image: particule/simplecolorapi:2.0
         imagePullPolicy: Always
         ports:
         - name: web
