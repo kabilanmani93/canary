@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-    - host: color.info
+    - host: istio-rollout.dev.argoproj.io
       http:
         paths:
           - path: /
@@ -15,4 +15,4 @@ spec:
               service:
                 name: colorapi
                 port:
-                  number: 8080
+                  number: 80

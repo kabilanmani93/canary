@@ -7,8 +7,8 @@ metadata:
 spec:
   strategy:
     canary:
-      canaryService: canary-svc  # required
-      stableService: stable-svc  # required
+      canaryService: colorapi-canary-svc  # required
+      stableService: colorapi-stable-svc  # required
       trafficRouting:
         istio:
           virtualService: 
@@ -16,13 +16,15 @@ spec:
             routes:
             - primary 
       steps:
-      - setWeight: 20
+      - setCanaryScale:
+          weight: 10
+      - setWeight: 90
       - pause:
           duration: "1m"
       - setWeight: 50
       - pause:
           duration: "1m" 
-  replicas: 10
+  replicas: 5
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -34,7 +36,7 @@ spec:
     spec:
       containers:
       - name: colorapi
-        image: particule/simplecolorapi:1.0
+        image: particule/simplecolorapi:2.0
         imagePullPolicy: Always
         ports:
         - name: web

@@ -16,13 +16,17 @@ kubectl debug -it colorapi-f7cb564b6-z29xn  -n default --image=jfrog.fkinternal.
 
 canary
 https://particule.io/en/blog/argocd-canary/
-portforward the svc : kubectl port-forward svc/argocd-server -n argocd 8080:443
+portforward the svc : kubectl port-forward svc/argocd-server -n argocd 8090:443
 appname=http://127.0.0.1:8001/api/v1/namespaces/default/services/colorapi:http/proxy/
 
 
 curl -s http://127.0.0.1:8001/api/v1/namespaces/default/services/colorapi:http/proxy/ | jq .color
 while true; do curl -s $appname | jq .color; sleep 0.5; done
 
+
+install istio for traffic split
+brew install istioctl
+istioctl install --set profile=demo -y
 
 
 
@@ -48,3 +52,7 @@ http://127.0.0.1:8001/api/v1/namespaces/default/services/colorapi:http/proxy/
 
 Rollout:
 https://argoproj.github.io/argo-rollouts/features/canary/
+
+
+istio ingress gateway
+https://medium.com/rahasak/kubernets-istio-ingress-gateway-c1202ba29dca
