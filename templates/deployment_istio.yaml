@@ -7,6 +7,14 @@ metadata:
 spec:
   strategy:
     canary:
+      canaryService: canary-svc  # required
+      stableService: stable-svc  # required
+      trafficRouting:
+        istio:
+          virtualService: 
+            name: rollout-vsvc   # required
+            routes:
+            - primary 
       steps:
       - setWeight: 20
       - pause:
@@ -14,7 +22,7 @@ spec:
       - setWeight: 50
       - pause:
           duration: "1m" 
-  replicas: 5
+  replicas: 10
   revisionHistoryLimit: 2
   selector:
     matchLabels:
