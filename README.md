@@ -31,3 +31,5 @@ step 2:
 https://tanzu.vmware.com/developer/guides/argocd-gs/
 
 argocd app create colorapi --repo https://github.com/kabilanmani93/canary.git --path . --dest-server https://kubernetes.default.svc --dest-namespace default
+
+https://argoproj.github.io/argo-rollouts/features/traffic-management/istio/
